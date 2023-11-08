@@ -1,8 +1,13 @@
-const Modal = ({ children }) => {
+const Modal = ({ children, close }) => {
+	const backDropClose = (e) => {
+		// e.target.className.includes('fade show') && close()
+		e.target === e.currentTarget && close()
+	}
 	return (
 		<div
 			className='modal fade show'
 			style={{ display: 'block', backdropFilter: 'blur(5px)' }}
+			onClick={backDropClose}
 		>
 			<div className='modal-dialog'>
 				<div className='modal-content'>
@@ -12,6 +17,7 @@ const Modal = ({ children }) => {
 							type='button'
 							className='btn-close'
 							aria-label='Close'
+							onClick={close}
 						></button>
 					</div>
 					<div className='modal-body'>{children}</div>
