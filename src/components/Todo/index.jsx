@@ -15,7 +15,6 @@ const Todo = ({ todo, deleteTodo, changeStatus }) => {
 				<button
 					className='btn btn-danger ms-4'
 					onClick={() => deleteTodo(todo.id)}
-					// onClick={deleteTodo}
 				>
 					Delete
 				</button>
