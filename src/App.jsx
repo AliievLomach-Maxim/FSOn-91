@@ -1,130 +1,84 @@
-import { useEffect, useState } from 'react'
+import {
+	createContext,
+	useCallback,
+	useEffect,
+	useMemo,
+	useRef,
+	useState,
+} from 'react'
 import FormikSearchProducts from './components/Forms/FormikSearchProducts'
 import { getProductsWithSearch } from './api/products'
 import ProductsListWithSearch from './components/ProductsListWithSearch'
+import GlobalContextProvider from './context/GlobalContext'
 
-// function name(params) {
-// 	return [value,fn]
-// }
-
-// const user = {
-// 	name: 'Alex',
-// 	age: 30,
-// }
-
-// const { name } = user
-// // const name = user.name
-
-// const user = ['Alex', 30]
-
-// const name = user[0]
-// const age = user[1]
-// const [name,age] = user
+// export const GlobalContext = createContext()
+// export const GlobalContext2 = createContext()
 
 const App = () => {
 	const [query, setQuery] = useState('')
 	const [isLoading, setIsLoading] = useState(false)
 	const [error, setError] = useState('')
 	const [products, setProducts] = useState(null)
+	const [counter, setCounter] = useState(0)
+	// const result = useMemo(() => {}, [])
 
-	// componentDidUpdate(_, prevState) {
-	// 	if (prevState.query !== this.state.query) {
-	// 		this.handleProducts()
-	// 	}
-	// }
+	const sortedProducts = useMemo(() => {
+		return (
+			products &&
+			products.toSorted((a, b) => {
+				console.log('sorting')
+				for (let i = 0; i < 10000000; i++) {}
+				return a.price - b.price
+			})
+		)
+	}, [products])
 
-	// CDM
-	// useEffect(() => {
-	// 	console.log('Mount')
-	// }, [])
-	// // CDU without if
-	// useEffect(() => {
-	// 	console.log('Mount')
-	// })
-
-	// useEffect(() => {
-	// 	console.log('Update')
-	// }, [query])
-	// //CWU
-	// useEffect(() => {
-	// 	console.log('Update')
-	// 	return ()=>console.log('return');
-	// }, [query])
-
-	useEffect(() => {
-		if (query) {
-			const handleProducts = async () => {
-				try {
-					setIsLoading(true)
-					const data = await getProductsWithSearch(query)
-					setProducts(data.products)
-					setError('')
-				} catch (error) {
-					setError(error.response.data)
-				} finally {
-					setIsLoading(false)
-				}
-			}
-			handleProducts()
+	const handleProducts = useCallback(async () => {
+		try {
+			setIsLoading(true)
+			const data = await getProductsWithSearch(query)
+			setProducts(data.products)
+			setError('')
+		} catch (error) {
+			setError(error.response.data)
+		} finally {
+			setIsLoading(false)
 		}
 	}, [query])
 
+	useEffect(() => {
+		if (query) {
+			handleProducts()
+		}
+	}, [handleProducts, query])
+
 	const handleSubmit = ({ query }) => {
 		setQuery(query)
-		// this.setState({ query })
 	}
 
+	// const ref = useRef()
+	// console.log(ref)
 	return (
 		<>
-			{isLoading && <h1>Loading...</h1>}
-			{error && <h1>{error}</h1>}
-			<FormikSearchProducts submit={handleSubmit} />
-			{products && <ProductsListWithSearch products={products} />}
+			{/* <GlobalContext.Provider value={{ counter, setCounter }}>
+				<GlobalContext2.Provider value={100000}> */}
+			<GlobalContextProvider>
+				{/* <input type='text' ref={ref} />
+			<button onClick={() => ref.current.focus()}>click REF</button> */}
+				<button onClick={handleProducts}>click</button>
+				<button onClick={() => setCounter((prev) => prev + 1)}>
+					{counter}
+				</button>
+				{isLoading && <h1>Loading...</h1>}
+				{error && <h1>{error}</h1>}
+				<FormikSearchProducts submit={handleSubmit} />
+				{sortedProducts && <ProductsListWithSearch products={sortedProducts} />}
+				{/* {products && <ProductsListWithSearch products={products} />} */}
+				{/* </GlobalContext2.Provider>
+			</GlobalContext.Provider> */}
+			</GlobalContextProvider>
 		</>
 	)
 }
 
 export default App
-
-// class App extends Component {
-// state = {
-// 	query: '',
-// 	isLoading: false,
-// 	error: '',
-// 	products: null,
-// }
-
-// 	componentDidUpdate(_, prevState) {
-// 		if (prevState.query !== this.state.query) {
-// 			this.handleProducts()
-// 		}
-// 	}
-
-// 	handleProducts = async () => {
-// 		try {
-// this.setState({ isLoading: true })
-// 			const data = await getProductsWithSearch(this.state.query)
-// 			this.setState({ products: data.products, error: '', isLoading: false })
-// 		} catch (error) {
-// 			this.setState({ error: error.response.data, isLoading: false })
-// 		}
-// 	}
-
-// 	handleSubmit = ({ query }) => {
-// 		this.setState({ query })
-// 	}
-
-// 	render() {
-// 		const { products, isLoading, error } = this.state
-// 		return (
-// 			<>
-// 				{isLoading && <h1>Loading...</h1>}
-// 				{error && <h1>{error}</h1>}
-// 				<FormikSearchProducts submit={this.handleSubmit} />
-// 				{products && <ProductsListWithSearch products={products} />}
-// 			</>
-// 		)
-// 	}
-// }
-
-// export default App
