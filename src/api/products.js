@@ -6,6 +6,11 @@ export const getProducts = async () => {
 	return data
 }
 
+export const getSingleProduct = async (id) => {
+	const { data } = await axios(`/${id}`)
+	return data
+}
+
 export const getProductsWithSearch = async (query) => {
 	const { data } = await axios(`/search?q=${query}`)
 	return data
