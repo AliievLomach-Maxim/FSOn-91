@@ -1,16 +1,8 @@
-// import { useContext } from 'react'
-import {
-	// GlobalContext,
-	// GlobalContext2,
-	useGlobalContext,
-} from '../../context/GlobalContext'
-// import { GlobalContext, GlobalContext2 } from '../../App'
+import { Link, useLocation } from 'react-router-dom'
 
-const Product = ({ product }) => {
-	// const context = useContext(GlobalContext)
-	const context = useGlobalContext()
-	// const context2 = useContext(GlobalContext2)
-	console.log('context :>> ', context)
+const Product = ({ product, isDetails }) => {
+	const location = useLocation()
+	console.log('location :>> ', location)
 	return (
 		<div className='card' style={{ width: '18rem' }}>
 			<img src={product.thumbnail} className='card-img-top' alt='...' />
@@ -20,6 +12,11 @@ const Product = ({ product }) => {
 				<a href='-' className='btn btn-primary'>
 					{product.price}
 				</a>
+				{!isDetails && (
+					<Link to={product.id.toString()} state={location}>
+						Details
+					</Link>
+				)}
 			</div>
 		</div>
 	)

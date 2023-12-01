@@ -120,3 +120,12 @@
 - Outlet & nested routes
 - use index
 - useParams
+
+### Less 2
+
+- useSearchParams
+- BackBtn with useLocation
+- location.state
+- navigate
+- <Navigate/>
+- lazy & suspense
