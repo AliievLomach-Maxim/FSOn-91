@@ -3,9 +3,6 @@ import { useState } from 'react'
 import React from 'react'
 
 const CreateTodoForm = ({ addTodo }) => {
-	const [title, setTitle] = useState('')
-	const [description, setDescription] = useState('')
-
 	const [value, setValue] = useState({
 		title: '',
 		description: '',
@@ -13,21 +10,10 @@ const CreateTodoForm = ({ addTodo }) => {
 
 	const handleSubmit = (e) => {
 		e.preventDefault()
-		addTodo({
-			title,
-			description,
-		})
+		addTodo(value)
 	}
 
 	const handleChange = ({ target: { value, name } }) => {
-		// this.setState({ [name]: value })
-		// if(name==='title') setTitle(value)
-		// if(name==='description') setDescription(value)
-		// 		if(name==='title') return setTitle(value)
-		// setDescription(value)
-		// if (name === 'title') setTitle(value)
-		// else setDescription(value)
-		// if use object state
 		setValue((prev) => ({ ...prev, [name]: value }))
 	}
 
@@ -42,7 +28,7 @@ const CreateTodoForm = ({ addTodo }) => {
 					type='text'
 					className='form-control'
 					id='exampleInputTitle'
-					value={title}
+					value={value.title}
 					onChange={handleChange}
 				/>
 			</div>
@@ -55,7 +41,7 @@ const CreateTodoForm = ({ addTodo }) => {
 					type='text'
 					className='form-control'
 					id='exampleInputDescription'
-					value={description}
+					value={value.description}
 					onChange={handleChange}
 				/>
 			</div>
