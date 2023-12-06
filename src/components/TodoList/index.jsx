@@ -1,13 +1,31 @@
-import { Component } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 import Todo from '../Todo'
-import todo from '../../todo.json'
+import CreateTodoForm from '../Forms/CreateTodoForm'
+import { addTodoAction } from '../../store/todo/actions'
+// import todo from '../../todo.json'
 
-class TodoList extends Component {
-	render() {
-		console.log('render')
-		// const { todo, deleteTodo, changeStatus } = this.props
+const TodoList = () => {
+	// const { todo } = useSelector((state) => {
+	// 	// return state.todo
+	// 	return state
+	// })
+	const { todo } = useSelector((state) => state.todo)
 
-		return (
+	const dispatch = useDispatch()
+
+	const addTodo = (todo) => {
+		// const newTodo = {
+		// 	...todo,
+		// 	id: nanoid(),
+		// 	completed: false,
+		// }
+		// dispatch({ type: 'addTodo', payload: newTodo })
+		dispatch(addTodoAction(todo))
+	}
+
+	return (
+		<>
+			<CreateTodoForm addTodo={addTodo} />
 			<ul className='list-group'>
 				{todo.map((el) => (
 					<Todo
@@ -18,8 +36,8 @@ class TodoList extends Component {
 					/>
 				))}
 			</ul>
-		)
-	}
+		</>
+	)
 }
 
 export default TodoList
