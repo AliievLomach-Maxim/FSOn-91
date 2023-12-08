@@ -1,5 +1,6 @@
 import { useDispatch } from 'react-redux'
-import { deleteTodoAction } from '../../store/todo/actions'
+import { deleteTodoAction } from '../../store/todo/todoSlice'
+// import { deleteTodoAction } from '../../store/todo/actions'
 
 const Todo = ({
 	todo,

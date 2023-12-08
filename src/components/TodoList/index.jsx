@@ -1,7 +1,8 @@
 import { useSelector, useDispatch } from 'react-redux'
 import Todo from '../Todo'
 import CreateTodoForm from '../Forms/CreateTodoForm'
-import { addTodoAction } from '../../store/todo/actions'
+import { addTodoAction } from '../../store/todo/todoSlice'
+// import { addTodoAction } from '../../store/todo/actions'
 // import todo from '../../todo.json'
 
 const TodoList = () => {
