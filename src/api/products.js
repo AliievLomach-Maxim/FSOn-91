@@ -1,5 +1,5 @@
 import axios from 'axios'
-axios.defaults.baseURL = 'https://dummyjson.com/products'
+axios.defaults.baseURL = 'https://dummyjson.com/produ'
 
 export const getProducts = async () => {
 	const { data } = await axios()

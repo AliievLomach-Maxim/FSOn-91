@@ -1,10 +1,11 @@
 import { Route, Routes } from 'react-router-dom'
-import Layout from './Layout'
 // import ProductsDetailsPage from './pages/ProductsPage/ProductsDetailsPage'
+import Layout from './layout'
 import { Suspense, lazy } from 'react'
 import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
 import { persistor, store } from './store/store'
+import Loader from './components/Loaer'
 
 const HomePage = lazy(() => import('./pages/HomePage'))
 const ProductsPage = lazy(() => import('./pages/ProductsPage'))
@@ -16,6 +17,7 @@ const App = () => {
 		<PersistGate loading={null} persistor={persistor}>
 			<Provider store={store}>
 				<Suspense fallback={<p>loading component...</p>}>
+					<Loader />
 					<Routes>
 						<Route path='/' element={<Layout />}>
 							<Route index element={<HomePage />} />
