@@ -5,6 +5,7 @@ const todoSlice = createSlice({
 	initialState: {
 		todo: [],
 		secretKey: '',
+		isLoading: false,
 	},
 	reducers: {
 		addTodoAction: {

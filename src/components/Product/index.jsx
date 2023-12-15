@@ -2,7 +2,7 @@ import { Link, useLocation } from 'react-router-dom'
 
 const Product = ({ product, isDetails }) => {
 	const location = useLocation()
-	console.log('location :>> ', location)
+
 	return (
 		<div className='card' style={{ width: '18rem' }}>
 			<img src={product.thumbnail} className='card-img-top' alt='...' />
