@@ -20,6 +20,8 @@ export const reducer = {
 	todo: persistedReducer,
 	user: userReducer,
 	products: productsReducer,
+
 	users2: usersReducer,
 	root: rootReducer,
+
 }

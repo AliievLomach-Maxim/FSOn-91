@@ -1,19 +1,24 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { reducer } from './reducer'
 import { persistStore, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from 'redux-persist'
-// import storage from 'redux-persist/lib/storage'
 
-// const persistConfig = {
-// 	key: 'todo',
-// 	storage,
-// 	whitelist: [''],
-// 	blacklist: [''],
+// const customMiddleWare = (store) => {
+// 	return (next) => {
+// 		return (action) => {
+// 			console.log('store :>> ', store)
+// 			if (typeof action === 'function') {
+// 				console.log('func')
+// 				return action(store.dispatch)
+// 			} else {
+// 				return next(action)
+// 			}
+// 		}
+// 	}
 // }
-
-// const persistedReducer = persistReducer(persistConfig, reducer)
 
 export const store = configureStore({
 	reducer,
+	// middleware: () => [customMiddleWare],
 	middleware: (getDefaultMiddleware) =>
 		getDefaultMiddleware({
 			serializableCheck: {
@@ -21,6 +26,5 @@ export const store = configureStore({
 			},
 		}),
 })
-// export const store = configureStore({ reducer: persistedReducer })
 
 export const persistor = persistStore(store)

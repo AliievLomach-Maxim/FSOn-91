@@ -1,10 +1,25 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { getProducts, getProductsWithSearch, getSingleProduct } from '../../api/products'
 
+// export const getAllProductsAction = () => {
+// 	return async (dispatch) => {
+// 		try {
+// 			dispatch(productsSlice.actions.productsPending())
+// 			const data = await getProducts()
+// 			dispatch(productsSlice.actions.productsFulfilled(data))
+// 			// dispatch({ type: 'data', payload: data.products })
+// 		} catch (error) {
+// 			dispatch(productsSlice.actions.productsRejected(error))
+// 		}
+// 	}
+// }
+
+
 export const getAllProductsAction = createAsyncThunk('products/getAllProducts', async () => {
 	const data = await getProducts()
 	return data
 })
+
 
 export const getSingleProductAction = createAsyncThunk('products/getSingleProduct', () =>
 	getSingleProduct()
@@ -30,6 +45,7 @@ export const getProductsWithSearchAction = createAsyncThunk(
 const initialState = {
 	products: null,
 	singleProduct: null,
+
 	// isLoading: false,
 	// error: '',
 }
@@ -48,6 +64,7 @@ const initialState = {
 // 	state.isLoading = false
 // }
 
+
 const handleFulfilledAll = (state, { payload }) => {
 	state.products = payload
 }
@@ -64,6 +81,7 @@ const productsSlice = createSlice({
 			.addCase(getAllProductsAction.fulfilled, handleFulfilledAll)
 			.addCase(getSingleProductAction.fulfilled, handleFulfilledSingle)
 			.addCase(getProductsWithSearchAction.fulfilled, handleFulfilledAll)
+
 		// .addMatcher((action) => action.type.endsWith('pending'), handlePending)
 		// .addMatcher((action) => action.type.endsWith('rejected'), handleRejected)
 		// .addMatcher((action) => action.type.endsWith('fulfilled'), handleFulfilled)
