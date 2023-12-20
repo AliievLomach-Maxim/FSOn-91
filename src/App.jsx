@@ -6,6 +6,9 @@ import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
 import { persistor, store } from './store/store'
 import Loader from './components/Loaer'
+import LoginPage from './pages/LoginPage'
+import RegistrationPage from './pages/RegistrationPage'
+import PostsPage from './pages/PostsPage'
 
 const HomePage = lazy(() => import('./pages/HomePage'))
 const ProductsPage = lazy(() => import('./pages/ProductsPage'))
@@ -24,7 +27,10 @@ const App = () => {
 							<Route path='products' element={<ProductsPage />} />
 							<Route path='products/:id' element={<ProductsDetailsPage />} />
 							<Route path='todo' element={<TodoPage />} />
+							<Route path='posts' element={<PostsPage />} />
 						</Route>
+						<Route path='/login' element={<LoginPage />} />
+						<Route path='/registration' element={<RegistrationPage />} />
 					</Routes>
 				</Suspense>
 			</Provider>

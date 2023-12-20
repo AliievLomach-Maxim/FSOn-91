@@ -7,6 +7,8 @@ import { persistReducer } from 'redux-persist'
 import { productsReducer } from './products/productsSlice'
 import { usersReducer } from './users2/usersSlice'
 import { rootReducer } from './root/rootSlice'
+import { authReducer } from './auth/slice'
+import { postsReducer } from './posts/slice'
 
 const persistConfig = {
 	key: 'todo',
@@ -16,6 +18,14 @@ const persistConfig = {
 
 const persistedReducer = persistReducer(persistConfig, todoReducer)
 
+const persistConfigAuth = {
+	key: 'token',
+	storage,
+	blacklist: ['user'],
+}
+
+const persistedReducerAuth = persistReducer(persistConfigAuth, authReducer)
+
 export const reducer = {
 	todo: persistedReducer,
 	user: userReducer,
@@ -23,5 +33,6 @@ export const reducer = {
 
 	users2: usersReducer,
 	root: rootReducer,
-
+	posts: postsReducer,
+	auth: persistedReducerAuth,
 }
