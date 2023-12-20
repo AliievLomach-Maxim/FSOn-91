@@ -23,6 +23,16 @@ const Header = () => {
 							Todo
 						</NavLink>
 					</li>
+					<li className='nav-item'>
+						<NavLink className='nav-link text-white' to='/posts'>
+Posts
+						</NavLink>
+					</li>
+					<li className='nav-item '>
+						<NavLink className='nav-link text-danger' to='/login'>
+							LogIn
+						</NavLink>
+					</li>
 				</ul>
 			</div>
 		</nav>
