@@ -7,7 +7,6 @@ const handlePending = (state) => {
 
 const handleRejected = (state, { error }) => {
 	state.isLoading = false
-	// console.log('action :>> ', action)
 	state.error = error.message
 }
 

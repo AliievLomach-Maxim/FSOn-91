@@ -8,7 +8,6 @@ import { productsReducer } from './products/productsSlice'
 import { usersReducer } from './users2/usersSlice'
 import { rootReducer } from './root/rootSlice'
 import { authReducer } from './auth/slice'
-import { postsReducer } from './posts/slice'
 
 const persistConfig = {
 	key: 'todo',
@@ -33,6 +32,5 @@ export const reducer = {
 
 	users2: usersReducer,
 	root: rootReducer,
-	posts: postsReducer,
 	auth: persistedReducerAuth,
 }

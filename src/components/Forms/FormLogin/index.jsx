@@ -1,8 +1,9 @@
 import { Link } from 'react-router-dom'
 
-const FormLogin = () => {
+const FormLogin = ({ login }) => {
 	const handleSubmit = (e) => {
 		e.preventDefault()
+		login({ email: e.target.elements.email.value, password: e.target.elements.password.value })
 	}
 	return (
 		<div className='card p-5 mx-auto' style={{ width: 500 }}>
